@@ -24,7 +24,7 @@ function FormItems(props)  {
   };
 
   return (
-    <div values={inputList}>
+    <div onChange={() => {props.handleToUpdateParentByChild(inputList)}} >
         {inputList.map((x, idx) => {
           let optionId = `Option-${idx}`
           return (

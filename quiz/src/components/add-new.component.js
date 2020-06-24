@@ -4,8 +4,12 @@ import FormItems from "./add-questions.component";
 export default class AddNewQuestion extends Component {
   constructor(props) {
     super(props);
-    this.state = { question: '', answerOptions: ['input-0'], correctAnswer: '',
-    weightage: 0, counter: 0 };
+    this.state = { 
+      question: '', 
+      answerOptions: [], 
+      correctAnswer: '',
+      weightage: 0,
+      category: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -17,14 +21,15 @@ export default class AddNewQuestion extends Component {
 
   handleSubmit = (e) => { 
     e.preventDefault();
-    console.log(e.target);
-    // console.log(e.target.FormItems);
-    console.log(JSON.stringify(this.state));
     console.log('Form Value Changed -> ', this.state);
   }
-  handleToUpdate = (someArg) => {
-    alert('We pass argument from Child to Parent: ' + someArg);
-}
+
+  handleToUpdateParentByChild = (someArg) => {
+    console.log('We pass argument from Child to Parent: ' , someArg);
+    this.setState({
+      answerOptions: someArg
+    });
+  }
     
     render() {
         return (
@@ -34,12 +39,19 @@ export default class AddNewQuestion extends Component {
                   <label htmlFor="question" className="pull-left">Question</label>
                   <textarea className="form-control" name="question" />
                 </div>
-                {/* {this.state.answerOptions.map(input => <FormItems key={input} />)} */}
-                <FormItems handleToUpdate = {this.handleToUpdate}/>
+                <FormItems handleToUpdateParentByChild = {this.handleToUpdateParentByChild}/>
 
                 <div className="form-group">
                   <label htmlFor="correctAnswer" className="pull-left">Correct Answer</label>
                   <input type="text" className="form-control" name="correctAnswer" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="weightage" className="pull-left">Weightage</label>
+                  <input type="number" className="form-control" name="weightage" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="category" className="pull-left">Question Category</label>
+                  <input type="number" className="form-control" name="category" />
                 </div>
 
                 <button type="submit" className="btn btn-outline-primary btn-sm" >Submit</button> 
