@@ -1,39 +1,58 @@
-import React from "react";
-import FormInputs from "./form-inputs.component";
-class Forms extends React.Component {
-  state = {
-    cats: [{name:"", age:""}],
-    owner: "",
-    description: ""
-  }
-handleChange = (e) => {
-    if (["name", "age"].includes(e.target.className) ) {
-      let cats = [...this.state.cats]
-      cats[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
-      this.setState({ cats }, () => console.log(this.state.cats))
-    } else {
-      this.setState({ [e.target.name]: e.target.value.toUpperCase() })
-    }
-  }
-addCat = (e) => {
-    this.setState((prevState) => ({
-      cats: [...prevState.cats, {name:"", age:""}],
-    }));
-  }
-handleSubmit = (e) => { e.preventDefault() }
-render() {
-    let {owner, description, cats} = this.state
-    return (
-      <form onSubmit={this.handleSubmit} onChange={this.handleChange} >
-        <label htmlFor="name">Owner</label> 
-        <input type="text" name="owner" id="owner" value={owner} />
-        <label htmlFor="description">Description</label> 
-        <input type="text" name="description" id="description" value={description} />
-        <button onClick={this.addCat}>Add new cat</button>
-        <FormInputs cats={cats} />
-        <input type="submit" value="Submit" /> 
-      </form>
-    )
-  }
+import React, { useState } from "react";
+function FormItems(props)  {
+  const [inputList, setInputList] = useState([{ optionItem: "" }]);
+  
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+    console.log("Input List", inputList);
+  };
+ 
+  // handle click event of the Remove button
+  const handleRemoveClick = index => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+ 
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { optionItem: ""}]);
+  };
+
+  return (
+    <div values={inputList}>
+        {inputList.map((x, idx) => {
+          let optionId = `Option-${idx}`
+          return (
+            <div key={idx}>
+              <div className="form-group" >
+                <label className="pull-left" htmlFor={optionId}>{`Option #${idx + 1}`}</label>
+                
+                <div className="input-group mb-3">
+                  <input type="text" name="optionItem" data-id={idx} id={optionId} value={x.optionItem}
+                  onChange={e => handleInputChange(e, idx)} className="option form-control" aria-describedby="basic-addon2" />
+                  <div className="input-group-append">
+                    {inputList.length !== 1 && 
+                      <span className="input-group-text" id="basic-addon2" onClick={() => handleRemoveClick(idx)}>
+                        <i className="fa fa-trash fa-trash"></i>
+                      </span>}
+                  </div>
+                </div>
+              </div>
+    
+              <div className="form-group">
+                {inputList.length - 1 === idx && <button onClick={handleAddClick}
+                type="button" className="btn btn-outline-primary btn-sm">+ Options</button>}
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  );
 }
-export default Forms
+
+export default FormItems;

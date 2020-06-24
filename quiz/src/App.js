@@ -1,11 +1,12 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import NameForm from "./components/add-questions.component";
 
-import Login from "./components/login.component";
-import SignUp from "./components/signup.component";
-import ResetPassword from "./components/reset-password.component";
+// import Login from "./components/login.component";
+// import SignUp from "./components/signup.component";
+// import ResetPassword from "./components/reset-password.component";
 // import Forms from "./components/add-questions.component";
 import AddNewQuestion from "./components/add-new.component";
 

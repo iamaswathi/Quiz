@@ -98,3 +98,27 @@ html,
 textarea {
     overflow: auto;
 }
+
+.bucket {
+    padding: 20px;
+    background: #f1f1f1;
+    color: #000;
+    font-size: 21px;
+    line-height: 1.3em;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px #f1ecec, 2px 1px 6px 4px rgba(150, 150, 132, 0.5);
+    font-weight: normal;
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+button:active {
+    outline: none;
+    border: none;
+}
+
+button:focus {
+    outline: 0;
+}
