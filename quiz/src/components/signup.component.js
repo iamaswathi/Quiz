@@ -4,6 +4,9 @@ import React, { Component } from "react";
 export default class SignUp extends Component {
     render() {
         return (
+
+           <div className="auth-wrapper">
+           <div className="auth-inner">
             <form>
                 <h3>Sign Up</h3>
 
@@ -24,7 +27,8 @@ export default class SignUp extends Component {
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
+                    <input type="password" className="form-control" placeholder="Enter password"
+                     autoComplete="on" />
                 </div>
 
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
@@ -32,6 +36,8 @@ export default class SignUp extends Component {
                     Already registered, <a href="www.google.com">Sign In?</a>
                 </p>
             </form>
+            </div>
+            </div>
         );
     }
 }

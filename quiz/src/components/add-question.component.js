@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-function FormItems(props)  {
+function QuestionAnswers(props)  {
   const [inputList, setInputList] = useState([{ optionItem: "" }]);
   
   // handle input change
@@ -7,9 +7,18 @@ function FormItems(props)  {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
+    validateOptions(list);
     setInputList(list);
     console.log("Input List", inputList);
   };
+
+  const validateOptions = (list) => {
+    // let validOptions = false;
+    console.log(list);
+    if (list) {
+      console.log(list);
+    }
+  }
  
   // handle click event of the Remove button
   const handleRemoveClick = index => {
@@ -21,6 +30,7 @@ function FormItems(props)  {
   // handle click event of the Add button
   const handleAddClick = () => {
     setInputList([...inputList, { optionItem: ""}]);
+    console.log(inputList);
   };
 
   return (
@@ -30,11 +40,15 @@ function FormItems(props)  {
           return (
             <div key={idx}>
               <div className="form-group" >
-                <label className="pull-left" htmlFor={optionId}>{`Option #${idx + 1}`}</label>
+                {/* <label className="pull-left" htmlFor={optionId}>{`Option #${idx + 1}`}</label> */}
                 
                 <div className="input-group mb-3">
-                  <input type="text" name="optionItem" data-id={idx} id={optionId} value={x.optionItem}
-                  onChange={e => handleInputChange(e, idx)} className="option form-control" aria-describedby="basic-addon2" />
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">{idx + 1}</span>
+                  </div>
+                  <input type="text" name="optionItem" id={optionId} value={x.optionItem}
+                  onChange={e => handleInputChange(e, idx)} className="option form-control" 
+                  aria-describedby="basic-addon2" autoFocus required={inputList.length <= 2}/>
                   <div className="input-group-append">
                     {inputList.length !== 1 && 
                       <span className="input-group-text" id="basic-addon2" onClick={() => handleRemoveClick(idx)}>
@@ -45,8 +59,9 @@ function FormItems(props)  {
               </div>
     
               <div className="form-group">
-                {inputList.length - 1 === idx && <button onClick={handleAddClick}
-                type="button" className="btn btn-outline-primary btn-sm">+ Options</button>}
+                {inputList.length - 1 === idx && inputList.length < 5 &&
+                <button onClick={handleAddClick} type="button" className="btn btn-outline-primary btn-sm">+ Options
+                </button>}
               </div>
             </div>
           );
@@ -55,4 +70,4 @@ function FormItems(props)  {
   );
 }
 
-export default FormItems;
+export default QuestionAnswers;
