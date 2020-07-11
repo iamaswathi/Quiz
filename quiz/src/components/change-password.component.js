@@ -67,7 +67,7 @@ export default class ChangePassword extends Component {
         alert('New and Confirm Password doesn\'t match');
         return;
         } else {
-            
+
         }
 
 
@@ -96,6 +96,7 @@ export default class ChangePassword extends Component {
             <div className="auth-wrapper">
                 <div className="auth-inner">
                     <form onSubmit={this.handleSubmit} onChange={(e) => {this.handleChange(e)}}>
+                        <h3>Change Password</h3>
                         <div className="form-group">
                             <input type={this.state.type} className="form-control" 
                                 placeholder="Current password" autoComplete="on" id="currentPassword" name="currentPassword" />

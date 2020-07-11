@@ -1,7 +1,8 @@
-import React from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import React from "react";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import { IndexRedirect } from "react-router";
 // import { BrowserRouter as Link } from "react-router-dom";
 // import NameForm from "./components/add-questions.component";
 
@@ -40,7 +41,7 @@ function App() {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/change-password" component={ChangePassword} />
-            <Route exact path='/admin' component={AddNewQuestion} />
+            <Route exact path="/admin" component={AddNewQuestion} />
           </Switch>
       </div>
     </Router>

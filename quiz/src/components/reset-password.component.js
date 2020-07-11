@@ -5,8 +5,10 @@ export default class ResetPassword extends Component {
         return (
             <div className="auth-wrapper">
                 <div className="auth-inner">
-                    <h6>A reset password link will be sent to your registered email id</h6>
                     <form>
+                        <h3>Reset Password</h3>
+
+                        <h6>A reset password link will be sent to your registered email id</h6>
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                             <span className="input-group-text"><i className="fa fa-envelope"></i></span>
