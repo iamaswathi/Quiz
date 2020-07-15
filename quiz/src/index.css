@@ -143,3 +143,145 @@ button:focus {
     background-color: #ffffff;
     color: #495057;
 }
+
+.errorMsg {
+    color: #d93025;
+    font-size: 10px;
+}
+
+.answerOption {
+    width: 100%;
+    float: left;
+    text-align: left;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.answerOption:hover {
+    border: 1px solid #3072d4;
+    cursor: pointer;
+}
+
+.selected-btn {
+    border: 3px solid #3072d4 !important;
+}
+
+.selected-btn .fa-check-circle {
+    color: #3072d4;
+}
+
+.answerOptions {
+    padding: 0;
+}
+
+.answerOptions li {
+    list-style-type: none;
+    display: block;
+}
+
+.options:hover {
+    border: 1px solid #3072d4;
+    cursor: pointer;
+}
+
+.options {
+    margin: 4px;
+    background-color: #EFEFEF;
+    border-radius: 4px;
+    border: 1px solid #D0D0D0;
+    overflow: auto;
+    float: left;
+    width: 100%;
+}
+
+.options label {
+    float: left;
+    margin: 0;
+    width: 100%;
+}
+
+.options label span {
+    text-align: left;
+    padding: 3px 0px;
+    display: block;
+    padding: 10px;
+    width: 100%;
+}
+
+.options label input {
+    position: absolute;
+    visibility: hidden;
+}
+
+.options input:checked+span {
+    background-color: #8a909e;
+    /* border: 3px solid #3072d4; */
+    color: #fff;
+    outline: none;
+    width: 100%;
+}
+
+.btn-wrap {
+    border-radius: 4px;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px 0;
+    transition: all 0.4s;
+    cursor: pointer;
+    margin: 20px 5px;
+    font-weight: 300;
+}
+
+.btn-next {
+    background: linear-gradient(to right, #67b26b, #4ca2cb) !important;
+}
+
+.btn-previous {
+    background: linear-gradient(to right, #4ca2cb, #67b26b) !important;
+}
+
+.btn-wrap span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.4s;
+}
+
+.btn-wrap span:after {
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+    font-size: 22px;
+    top: -4px;
+}
+
+.btn-next span:after {
+    content: '\00bb';
+    right: -20px;
+}
+
+.btn-previous span:after {
+    content: '\00ab';
+    left: -20px;
+}
+
+.btn-next:hover span {
+    padding-right: 25px;
+}
+
+.btn-next:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.btn-previous:hover span {
+    padding-left: 25px;
+}
+
+.btn-previous:hover span:after {
+    opacity: 1;
+    left: 0;
+}

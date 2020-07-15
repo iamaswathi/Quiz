@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+// import Example from "./popover.component";
 
-// import Button from 'react-bootstrap/button';
-// type FrmData = {
-//     currentPassword: string,
-//     newPassword: string,
-//     confirmPassword: string
-//   }
 export default class ChangePassword extends Component {
     constructor(props){
         super(props);

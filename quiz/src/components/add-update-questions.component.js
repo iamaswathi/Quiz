@@ -14,24 +14,12 @@ export default class AddNewQuestion extends Component {
       correctAnswer: [],
       correctAnswers: [],
       weightage: 0,
-      category: '',
-      questionsList: []
+      category: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onSelectAnswers = this.onSelectAnswers.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.callAPI = this.callAPI.bind(this);
   }
-
-  callAPI() {
-    fetch("https://8f462d07-eef9-44bf-8290-2b2d9a3dd6f5.mock.pstmn.io/listQuestions")
-      .then(res => res.json())
-      .then(qList => {
-        this.setState({ questionsList: qList.questions });
-        console.log(this.state);
-    });
-  }
-
 
   handleChange (evt) {
     this.setState({
@@ -99,16 +87,7 @@ export default class AddNewQuestion extends Component {
         return (
 
           <div className="auth-wrapper">
-          {/* <div className="auth-inner"> */}
             <div className="bucket">
-              <button onClick={this.callAPI}>CLick</button>
-              {this.state.questionsList.length > 0 && (
-                <ul>
-                  {this.state.questionsList.map((book) => (
-                      <li key={book.questionId}>{book.questionId} - {book.question}</li>
-                  ))}
-                </ul>
-              )}
               <form onSubmit={this.handleSubmit} onChange={(e) => {this.handleChange(e)}}>
                 <div className="form-group required">
                   <label htmlFor="question" className="pull-left">Question</label>
