@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
 import SignIn from "./signin.component";
-import { API_URL, regex } from "./../shared/constants";
+import { API_URL, VALIDATION_REGEX } from "./../shared/constants";
 
 export default class SignUp extends Component {
     constructor(props){
@@ -26,10 +26,10 @@ export default class SignUp extends Component {
         let errors = {};
         let formIsValid = true;
 
-        const validName = regex.name.test(this.state.name);
-        const validEmail = regex.email.test(this.state.email);
-        const validPhone = regex.phone.test(this.state.phone);
-        const validPassword = regex.password.test(this.state.password);
+        const validName = VALIDATION_REGEX.name.test(this.state.name);
+        const validEmail = VALIDATION_REGEX.email.test(this.state.email);
+        const validPhone = VALIDATION_REGEX.phone.test(this.state.phone);
+        const validPassword = VALIDATION_REGEX.password.test(this.state.password);
         
         if (!this.state.name || this.state.name === ""){
             formIsValid = false;

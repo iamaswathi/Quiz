@@ -3,7 +3,7 @@ import { BrowserRouter as Switch, Route } from "react-router-dom";
 import ResetPassword from "./reset-password.component";
 import SignUp from "./signup.component";
 // import AddNewQuestion from "./add-question.component";
-import { API_URL, regex } from "./../shared/constants";
+import { API_URL, VALIDATION_REGEX } from "./../shared/constants";
 
 export default class SignIn extends Component {
     constructor(props){
@@ -27,8 +27,8 @@ export default class SignIn extends Component {
         let errors = {};
         let formIsValid = true;
 
-        const validEmail = regex.email.test(this.state.emailOrPhone);
-        const validPhone = regex.phone.test(this.state.emailOrPhone);
+        const validEmail = VALIDATION_REGEX.email.test(this.state.emailOrPhone);
+        const validPhone = VALIDATION_REGEX.phone.test(this.state.emailOrPhone);
         
         if (!this.state.emailOrPhone || this.state.emailOrPhone === ""){
             formIsValid = false;
@@ -91,15 +91,13 @@ export default class SignIn extends Component {
 
                         <div className="form-group">
                             <label htmlFor="emailOrPhone">Email or Phone</label>
-                            <input type="text" className="form-control" name="emailOrPhone"
-                                value={this.state.emailOrPhone} placeholder="Email or Phone" />
+                            <input type="text" className="form-control" name="emailOrPhone" placeholder="Email or Phone" />
                             <div className="errorMsg">{this.state.errors.emailOrPhone}</div>
                         </div>
 
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input type="password" className="form-control" name="password"
-                                value={this.state.password} placeholder="Password" autoComplete="on" />
+                            <input type="password" className="form-control" name="password" placeholder="Password" autoComplete="on" />
                             <div className="errorMsg">{this.state.errors.password}</div>
                         </div>
 
