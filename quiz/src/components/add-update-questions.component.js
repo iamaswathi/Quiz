@@ -77,56 +77,53 @@ export default class AddNewQuestion extends Component {
     this.setState({errors: errors});
     return formIsValid;
   }
-
-  // componentDidMount(){
-  //   this.state.question.focus(); 
-  // }
-
     
-    render() {
-        return (
-
-          <div className="auth-wrapper">
-            <div className="bucket">
-              <form onSubmit={this.handleSubmit} onChange={(e) => {this.handleChange(e)}}>
-                <div className="form-group required">
-                  <label htmlFor="question" className="pull-left">Question</label>
-                  <textarea className="form-control" name="question" autoFocus required/>
-                </div>
-                {/* {this.state.question.length > 1 ?<div> */}
-                <div className="form-group">
-                  <label htmlFor="question" className="pull-left">Options</label>
-                </div>
-                <QuestionAnswers handleToUpdateParentByChild = {this.handleToUpdateParentByChild}/> 
-                {/* </div> : null} */}
-                <div className="form-group required multiSelectLabel">
-                  <label className="pull-left">Correct Answer(s)</label>
-                </div>
-                <div className="form-group required multiSelectContainer">
-                  <Multiselect name="correctAnswer" options={this.state.answerOptions} 
-                    displayValue="key" required
-                    showCheckbox={true} 
-                    onSelect={this.onSelectAnswers} onChange={this.handleChange}/>
-                </div>
-                <div className="form-group required">
-                  <label htmlFor="weightage" className="pull-left">Weightage</label>
-                  <input type="number" className="form-control" name="weightage" min="1" max="5" required/>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="category" className="pull-left">Category</label>
-                  <select className="form-control" name="category"
-                    onChange={this.handleChange} required>
-                    {QUIZCATEGORY.map((e, key) => {
-                        return <option key={key} value={e.key}>{e.value}</option>;
-                    })}
-                  </select>
-                </div>
-
-                <button type="submit" className="btn btn-outline-primary btn-sm" >Submit</button> 
-
-                </form>
+  render() {
+    return (
+      <div className="auth-wrapper">
+        <div className="bucket">
+          <form onSubmit={this.handleSubmit} onChange={(e) => {this.handleChange(e)}}>
+            <div className="form-group required">
+              <label htmlFor="question" className="pull-left">Question</label>
+              <textarea className="form-control" name="question" autoFocus required/>
             </div>
+
+            <div className="form-group">
+              <label htmlFor="question" className="pull-left">Options</label>
             </div>
-        )
-    }
+
+            <QuestionAnswers handleToUpdateParentByChild = {this.handleToUpdateParentByChild}/> 
+            
+            <div className="form-group required multiSelectLabel">
+              <label className="pull-left">Correct Answer(s)</label>
+            </div>
+            <div className="form-group required multiSelectContainer">
+              <Multiselect name="correctAnswer" options={this.state.answerOptions} 
+                displayValue="key" required
+                showCheckbox={true} 
+                onSelect={this.onSelectAnswers} onChange={this.handleChange}/>
+            </div>
+
+            <div className="form-group required">
+              <label htmlFor="weightage" className="pull-left">Weightage</label>
+              <input type="number" className="form-control" name="weightage" min="1" max="5" required/>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="category" className="pull-left">Category</label>
+              <select className="form-control" name="category"
+                onChange={this.handleChange} required>
+                {QUIZCATEGORY.map((e, key) => {
+                    return <option key={key} value={e.key}>{e.value}</option>;
+                })}
+              </select>
+            </div>
+
+            <button type="submit" className="btn btn-outline-primary btn-sm" >Submit</button> 
+
+          </form>
+        </div>
+      </div>
+    )
+  }
 }

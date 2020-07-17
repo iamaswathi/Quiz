@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-// import quizQuestions from './api/QuizQuestions';
 import Quiz from './quiz.component';
-// import Result from './components/Result';
-// import './App.css';
-// import { TIMER_VAL } from "./../shared/constants";
 // import { API_URL } from  "./../shared/constants";
 import {result} from "../shared/api";
 import Timer from "./timer.component";
@@ -14,15 +10,12 @@ class QuizContainer extends Component {
 
     this.state = {
         counter: 0,
+        questionsList: [],
         questionId: 1,
         question: '',
         answerOptions: [],
-        answer: '',
         selectedAnswers : [],
-        // result: '',
-        questionsList: [],
         minAnswers: 1,
-        // correctAnswer: [],
         weightage: 1,
         category: '',
         checked: false,
@@ -33,10 +26,8 @@ class QuizContainer extends Component {
     this.setPreviousQuestion = this.setPreviousQuestion.bind(this);
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this.checkboxHandler = this.checkboxHandler.bind(this);
-    // this.viewreults = this.viewreults.bind(this);
-
-
   }
+
   handleAnswerSelected(e){
     console.log(e.target.value);
 
@@ -95,9 +86,9 @@ class QuizContainer extends Component {
     // .catch(error => console.log('error', error));
   }
 
-componentWillUnmount() {
-        clearInterval(this.myInterval)
-    }
+  componentWillUnmount() {
+    clearInterval(this.myInterval)
+  }
 
   setNextQuestion() {
     const counter = this.state.counter + 1;
@@ -108,10 +99,10 @@ componentWillUnmount() {
       questionId: questionId,
       question: this.state.questionsList[counter].question,
       answerOptions: this.state.questionsList[counter].answer.options,
-      minAnswers: this.state.questionsList[counter].answer.minAnswers,
-      answer: ''
+      minAnswers: this.state.questionsList[counter].answer.minAnswers
     });
   }
+
   setPreviousQuestion() {
     const counter = this.state.counter - 1;
     const questionId = this.state.questionId - 1;
@@ -122,47 +113,46 @@ componentWillUnmount() {
       question: this.state.questionsList[counter].question,
       answerOptions: this.state.questionsList[counter].answer.options,
       minAnswers: this.state.questionsList[counter].answer.minAnswers,
-      answer: ''
     });
   }
+
   checkboxHandler(e) {
     const item = e.target.name;
     const isChecked = e.target.checked;
     this.setState(prevState => ({ checkedItems: prevState.checkedItems.set(item, isChecked) }));
   }
+
   renderQuiz() {
     return (
-        <div>
-            <Quiz viewreults={this.viewreults}
-                setNextQuestion={this.setNextQuestion}
-                counter={this.state.counter}
-                setPreviousQuestion={this.setPreviousQuestion}
-                answer={this.state.answer}
-                selectedAnswer = {this.state.selectedAnswers[this.state.counter]}
-                answerOptions={this.state.answerOptions}
-                questionId={this.state.questionId}
-                question={this.state.question}
-                questionTotal={this.state.questionsList.length}
-                onAnswerSelected = {this.handleAnswerSelected}
-                quizLength = {this.state.questionsList.length}
-                minAnswers = {this.state.minAnswers}
-                onCheck = {this.checkboxHandler}
-                checkedItems = {this.state.checkedItems}
-            />
-            <Timer />
+      <div>
+        <Quiz viewreults={this.viewreults}
+          counter={this.state.counter}
+          quizLength = {this.state.questionsList.length}
+          questionId={this.state.questionId}
+          question={this.state.question}
+          answerOptions={this.state.answerOptions}
+          minAnswers = {this.state.minAnswers}
+          setNextQuestion={this.setNextQuestion}
+          setPreviousQuestion={this.setPreviousQuestion}
+          selectedAnswer = {this.state.selectedAnswers[this.state.counter]}
+          onAnswerSelected = {this.handleAnswerSelected}
+          onCheck = {this.checkboxHandler}
+          checkedItems = {this.state.checkedItems}
+        />
+        <Timer />
       </div>
     );
   }
   render() {
     return (
-        <div className="auth-wrapper">
-            <div className="bucket col-xs-12 col-sm-6">
-                {this.state.result ? this.renderResult() : this.renderQuiz()}
-            </div>
+      <div className="auth-wrapper">
+        <div className="bucket col-xs-12 col-sm-6">
+          {this.state.result ? this.renderResult() : this.renderQuiz()}
         </div>
-
+      </div>
     );
   }
 
 }
+
 export default QuizContainer;

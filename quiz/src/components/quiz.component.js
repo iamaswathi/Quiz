@@ -8,31 +8,30 @@ function Quiz(props) {
     console.log('quiz props',props)
     function renderAnswerOptions(key,index) {
         return (
-          <AnswerOptions
-            index ={index}
-            key={key.id}
-            answerContent={key.value}
-            answer={props.answer}
-            questionId={props.questionId}
-            selectedAnswer={props.selectedAnswer}
-            onAnswerSelected={props.onAnswerSelected}
-            onCheck={props.onCheck}
-            minAnswers={props.minAnswers}
-            checkedItems={props.checkedItems}
-          />
+            <AnswerOptions
+                index ={index}
+                key={key.id}
+                questionId={props.questionId}
+                answerContent={key.value}
+                selectedAnswer={props.selectedAnswer}
+                onAnswerSelected={props.onAnswerSelected}
+                onCheck={props.onCheck}
+                minAnswers={props.minAnswers}
+                checkedItems={props.checkedItems}
+            />
         );
     }
     
     return (
         <div key={props.questionId} className="col-xs-12 quiz-story">
             
-            
-            <QuestionCount viewreults={props.viewreults}
-            counter={props.questionId}
-            total={props.questionTotal}
+            <QuestionCount
+                counter={props.questionId}
+                total={props.quizLength}
             />
             
             <Question  content={props.question} />
+            
             <div className="clearfix" >
                 <ul className="answerOptions">
                     {props.answerOptions.map(renderAnswerOptions)}
