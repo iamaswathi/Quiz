@@ -1,100 +1,68 @@
-import React, { Component } from "react";
-import { API_URL } from  "./../shared/constants";
+import React from 'react';
+import Question from './question.comonent';
+import QuestionCount from './question-count.component';
+import AnswerOptions from './answer-options.component';
+// import Timer from "./timer.component";
 
-export default class Quizz extends Component {
-    constructor() {
-      super();
-  
-      this.state = {
-        questions: [],
-        currentQuestion: 0
-      }
-  
-      this.nextQuestion = this.nextQuestion.bind(this);
-      this.previousQuestion = this.previousQuestion.bind(this);
-    //   this.callAPI();
-    }
-    // callAPI() {
-    //     fetch(API_URL + '/listQuestions', {
-    //         method: 'get',
-    //         mode: 'cors',
-    //         headers: {
-    //             'Accept': 'application/json, text/plain, */*',
-    //             'Content-Type': 'application/json',
-    //             'Access-Control-Allow-Origin': '*'
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(result => {
-    //         console.log(result);
-    //         this.setState({questions: response.questions});
-    //     })
-    //     .catch(error => console.log('error', error));
-    // }
-    componentDidMount() {
-    //   fetchQuestions().then(questions => this.setState({ questions }))
-    fetch(API_URL + '/listQuestions', {
-        method: 'get',
-        mode: 'cors',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-        }
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log(result);
-        this.setState({questions: result.questions});
-    })
-    .catch(error => console.log('error', error));
-    }
-  
-    nextQuestion() {
-      this.setState(prevState => ({
-        currentQuestion: prevState.currentQuestion + 1
-      }))
-    }
-  
-    previousQuestion() {
-      this.setState(prevState => ({
-        currentQuestion: prevState.currentQuestion - 1
-      }))
+function Quiz(props) {
+    console.log('quiz props',props)
+    function renderAnswerOptions(key,index) {
+        return (
+          <AnswerOptions
+            index ={index}
+            key={key.id}
+            answerContent={key.value}
+            answer={props.answer}
+            questionId={props.questionId}
+            selectedAnswer={props.selectedAnswer}
+            onAnswerSelected={props.onAnswerSelected}
+            onCheck={props.onCheck}
+            minAnswers={props.minAnswers}
+            checkedItems={props.checkedItems}
+          />
+        );
     }
     
-  
-    render() {
-      if (!this.state.questions.length) return <div>Loading…</div>        
-  const optionsList = this.state.questions[this.state.currentQuestion].options;
-      return (
-        <div className="auth-wrapper">
-            <div className="bucket">
-                <p>{this.state.questions[this.state.currentQuestion].question}</p>
-                <ul>
-                  {optionsList.map(i => {
-                    return <li className="col-xs-12 col-sm-6 col-md-6">
-                      {  <p>{this.state.questions[this.state.currentQuestion].options}</p>
-                        ? (<button type="button" className={ 'answerOption' }
-                        >{i}</button> ) : (<span></span>)}
-                      </li>;
-                    })}
+    return (
+        <div key={props.questionId} className="col-xs-12 quiz-story">
+            
+            
+            <QuestionCount viewreults={props.viewreults}
+            counter={props.questionId}
+            total={props.questionTotal}
+            />
+            
+            <Question  content={props.question} />
+            <div className="clearfix" >
+                <ul className="answerOptions">
+                    {props.answerOptions.map(renderAnswerOptions)}
                 </ul>
-                {/* <li className="col-xs-12 col-sm-6 col-md-6">
-                    {                <p>{this.state.questions[this.state.currentQuestion].options}</p>
- ? (<button 
-                    type="button"
-                    id={props.answerType}
-                    value={props.index}
-                    className={(props.selectedAnswer === props.index) ? 'answerOption selected-btn' : 'answerOption' }
-                    onClick={props.onAnswerSelected}>
-                    <i className={(props.selectedAnswer === props.index) ? 'fa fa-check-circle' : 'fa' }></i>
-                    {props.answerContent}
-                    </button>) : (<span></span>)}
-                </li>  */}
-                <button onClick={this.previousQuestion}>Previous</button>
-                <button onClick={this.nextQuestion}>Next</button>
+            </div>
+            <div className="clearfix" >
+                {props.counter > 0 ? (
+                    <div className="button_cont float-left" onClick={props.setPreviousQuestion} >
+                        <button className="btn btn-wrap btn-previous" >
+                            <span>Previous</span>
+                        </button>
+                    </div>) : ''}
+        
+                {props.counter < props.quizLength-1 ? (
+                    <div className="button_cont float-right" onClick={props.setNextQuestion} >
+                        <button className="btn btn-wrap btn-next" >
+                            <span>Next</span>
+                        </button>
+                    </div>) : (<span></span>)}
+
+                {props.counter === props.quizLength-1 ? (
+                    <div className="button_cont float-right" onClick={props.viewreults}>
+                        <button className="btn btn-wrap btn-next" >
+                            <span>Submit</span>
+                        </button>
+                    </div>) : (<span></span>)}
             </div>
         </div>
-      )
-    }
-  }
+    );
+}
+
+  
+export default Quiz;

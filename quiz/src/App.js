@@ -13,7 +13,7 @@ import ChangePassword from "./components/change-password.component";
 // import Forms from "./components/add-questions.component";
 import AddNewQuestion from "./components/add-update-questions.component";
 // import Quizz from "./components/quiz.component";
-import Quiz1 from "./components/quiz1";
+import QuizContainer from "./components/quiz-container.component";
 
 function App() {
   return (<Router>
@@ -39,7 +39,7 @@ function App() {
       </nav>
 
           <Switch>
-            <Route exact path="/" component={Quiz1} />
+            <Route exact path="/" component={QuizContainer} />
             <Route path="/sign-in" component={SignIn} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/reset-password" component={ResetPassword} />

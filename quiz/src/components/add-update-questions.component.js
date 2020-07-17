@@ -104,7 +104,7 @@ export default class AddNewQuestion extends Component {
                 </div>
                 <div className="form-group required multiSelectContainer">
                   <Multiselect name="correctAnswer" options={this.state.answerOptions} 
-                    displayValue="optionItem" required
+                    displayValue="key" required
                     showCheckbox={true} 
                     onSelect={this.onSelectAnswers} onChange={this.handleChange}/>
                 </div>

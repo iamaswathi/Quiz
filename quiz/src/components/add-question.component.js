@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 function QuestionAnswers(props)  {
-  const [inputList, setInputList] = useState([{ optionItem: "" }]);
+  const [inputList, setInputList] = useState([{ optionItem: "" , key: ''}]);
   
   // handle input change
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputList];
     list[index][name] = value;
+    list[index].key = index + 1;
     validateOptions(list);
     setInputList(list);
     console.log("Input List", inputList);
@@ -29,7 +30,7 @@ function QuestionAnswers(props)  {
  
   // handle click event of the Add button
   const handleAddClick = () => {
-    setInputList([...inputList, { optionItem: ""}]);
+    setInputList([...inputList, { optionItem: "", key: ""}]);
     console.log(inputList);
   };
 

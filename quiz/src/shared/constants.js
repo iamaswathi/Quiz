@@ -54,3 +54,4 @@ export const QUIZCATEGORY = [
     }
 ];
 
+export const TIMER_VAL = 1;

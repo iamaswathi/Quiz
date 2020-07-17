@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 // import quizQuestions from './api/QuizQuestions';
-import Quiz from './Quiz';
+import Quiz from './quiz.component';
 // import Result from './components/Result';
 // import './App.css';
+// import { TIMER_VAL } from "./../shared/constants";
 // import { API_URL } from  "./../shared/constants";
-import {result} from "./../shared/api";
+import {result} from "../shared/api";
+import Timer from "./timer.component";
 
-class Quiz1 extends Component {
+class QuizContainer extends Component {
     constructor(props) {
     super(props);
 
@@ -16,14 +18,15 @@ class Quiz1 extends Component {
         question: '',
         answerOptions: [],
         answer: '',
-        selectedAnswers : [{}],
+        selectedAnswers : [],
         // result: '',
         questionsList: [],
         minAnswers: 1,
         // correctAnswer: [],
         weightage: 1,
         category: '',
-        checked: false,checkedItems: new Map(),
+        checked: false,
+        checkedItems: new Map(),
     };
     console.log(result);
     this.setNextQuestion = this.setNextQuestion.bind(this);
@@ -35,15 +38,24 @@ class Quiz1 extends Component {
 
   }
   handleAnswerSelected(e){
-    var _self = this;
-    var obj = _self.state.selectedAnswers;
-    var index = parseInt(e.target.value);
-    console.log("for selected question number " + (_self.state.counter + 1) +  " answer is " + index + " selected");
-    var Qindex = (_self.state.counter );
-    // create map and store all selecred answers with quiz Questions
-    obj[Qindex] = index;
-    _self.setState({selectedAnswers : obj})
+    console.log(e.target.value);
 
+    // var _self = this;
+    // var obj = _self.state.selectedAnswers;
+    var objArr = [];
+    var index = parseInt(e.target.value);
+    // console.log("for selected question number " + (_self.state.counter + 1) + 
+    // " answer is " + index + " selected");
+    // var Qindex = (_self.state.counter );
+    // // create map and store all selecred answers with quiz Questions
+    // obj[Qindex] = index;
+    objArr.push(e.target.value);
+    console.log("objArr -> ", objArr);
+
+    this.setState(prevState => ({
+      selectedAnswers: [...prevState.selectedAnswers, index]
+    }))
+    console.log("selectedAnswers -> ", this.state.selectedAnswers);
   }
 
   componentDidMount() {
@@ -55,6 +67,7 @@ class Quiz1 extends Component {
         weightage: result.questions[0].weightage,
         category: result.questions[0].category
     });
+
     // fetch(API_URL + '/listQuestions', {
     //     method: 'get',
     //     mode: 'cors',
@@ -82,7 +95,9 @@ class Quiz1 extends Component {
     // .catch(error => console.log('error', error));
   }
 
-
+componentWillUnmount() {
+        clearInterval(this.myInterval)
+    }
 
   setNextQuestion() {
     const counter = this.state.counter + 1;
@@ -117,22 +132,25 @@ class Quiz1 extends Component {
   }
   renderQuiz() {
     return (
-      <Quiz viewreults={this.viewreults}
-        setNextQuestion={this.setNextQuestion}
-        counter={this.state.counter}
-        setPreviousQuestion={this.setPreviousQuestion}
-        answer={this.state.answer}
-        selectedAnswer = {this.state.selectedAnswers[this.state.counter]}
-        answerOptions={this.state.answerOptions}
-        questionId={this.state.questionId}
-        question={this.state.question}
-        questionTotal={this.state.questionsList.length}
-        onAnswerSelected = {this.handleAnswerSelected}
-        quizLength = {this.state.questionsList.length}
-        minAnswers = {this.state.minAnswers}
-        onCheck = {this.checkboxHandler}
-        checkedItems = {this.state.checkedItems}
-      />
+        <div>
+            <Quiz viewreults={this.viewreults}
+                setNextQuestion={this.setNextQuestion}
+                counter={this.state.counter}
+                setPreviousQuestion={this.setPreviousQuestion}
+                answer={this.state.answer}
+                selectedAnswer = {this.state.selectedAnswers[this.state.counter]}
+                answerOptions={this.state.answerOptions}
+                questionId={this.state.questionId}
+                question={this.state.question}
+                questionTotal={this.state.questionsList.length}
+                onAnswerSelected = {this.handleAnswerSelected}
+                quizLength = {this.state.questionsList.length}
+                minAnswers = {this.state.minAnswers}
+                onCheck = {this.checkboxHandler}
+                checkedItems = {this.state.checkedItems}
+            />
+            <Timer />
+      </div>
     );
   }
   render() {
@@ -147,4 +165,4 @@ class Quiz1 extends Component {
   }
 
 }
-export default Quiz1;
+export default QuizContainer;
