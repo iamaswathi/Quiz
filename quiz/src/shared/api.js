@@ -7,10 +7,10 @@ export const result = {
 			"answer":{
 				"minAnswers": 3,
 				"options" : [
-                    {"id":"x1", "value": "3"}, 
-                    {"id":"x2", "value": "5"}, 
-                    {"id":"x3", "value": "6"}, 
-                    {"id":"x4", "value": "4"}]
+                    {"id":"x1", "value": "3", "checked": false}, 
+                    {"id":"x2", "value": "5", "checked": false}, 
+                    {"id":"x3", "value": "6", "checked": false}, 
+                    {"id":"x4", "value": "4", "checked": false}]
 			},
 			"weightage": 4,
 			"category": "GK"
@@ -20,10 +20,10 @@ export const result = {
 			"answer":{
 				"minAnswers": 2,
 				"options" : [
-                    {"id":"x1", "value": "7.1484"}, 
-                    {"id":"x2", "value": "7.14"}, 
-                    {"id":"x3", "value": "6.44"}, 
-                    {"id":"x4", "value": "5.44"}]
+                    {"id":"x1", "value": "7.1484", "checked": false}, 
+                    {"id":"x2", "value": "7.14", "checked": false}, 
+                    {"id":"x3", "value": "6.44", "checked": false}, 
+                    {"id":"x4", "value": "5.44", "checked": false}]
 			},
 			"weightage": 1,
 			"category": "Maths"
@@ -33,10 +33,10 @@ export const result = {
 			"answer":{
 				"minAnswers": 1,
                 "options" : [
-                    {"id":"x1", "value": "An old-fashioned punching bag"}, 
-                    {"id":"x2", "value": "A breed of dog"}, 
-                    {"id":"x3", "value": "The largest citrus fruit"}, 
-                    {"id":"x4", "value": "A flower"}]
+                    {"id":"x1", "value": "An old-fashioned punching bag", "checked": false}, 
+                    {"id":"x2", "value": "A breed of dog", "checked": false}, 
+                    {"id":"x3", "value": "The largest citrus fruit", "checked": false}, 
+                    {"id":"x4", "value": "A flower", "checked": false}]
 			},
 			"weightage": 4,
 			"category": "GK"
@@ -61,7 +61,7 @@ export const result = {
                     {"id":"x2", "value": "<input>"}, 
                     {"id":"x3", "value": "<p>"}, 
                     {"id":"x4", "value": "<span>"}, 
-                    {"id":"x4", "value": "All of the above"}]
+                    {"id":"x5", "value": "All of the above"}]
 			},
 			"weightage": 4,
 			"category": "GK"

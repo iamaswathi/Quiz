@@ -14,50 +14,79 @@ class QuizContainer extends Component {
         questionId: 1,
         question: '',
         answerOptions: [],
-        selectedAnswers : [],
         minAnswers: 1,
         weightage: 1,
         category: '',
         checked: false,
         checkedItems: new Map(),
+        hobbies:[],
+        selectedAnswers: [[],[], [],[], [],[], [],[], [],[]]
     };
-    console.log(result);
     this.setNextQuestion = this.setNextQuestion.bind(this);
     this.setPreviousQuestion = this.setPreviousQuestion.bind(this);
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this.checkboxHandler = this.checkboxHandler.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
-
-  handleAnswerSelected(e){
-    console.log(e.target.value);
-
-    // var _self = this;
-    // var obj = _self.state.selectedAnswers;
-    var objArr = [];
-    var index = parseInt(e.target.value);
-    // console.log("for selected question number " + (_self.state.counter + 1) + 
-    // " answer is " + index + " selected");
-    // var Qindex = (_self.state.counter );
-    // // create map and store all selecred answers with quiz Questions
-    // obj[Qindex] = index;
-    objArr.push(e.target.value);
-    console.log("objArr -> ", objArr);
-
+  handleChange = e => {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
     this.setState(prevState => ({
-      selectedAnswers: [...prevState.selectedAnswers, index]
-    }))
-    console.log("selectedAnswers -> ", this.state.selectedAnswers);
-  }
+        checkedItems: prevState.checkedItems.set(item, isChecked)
+    }));
+};
+
+handleAnswerSelected(e, options, index, inputType){
+  const isChecked = e.target.checked;
+  options.forEach((opt, ind)=>{
+    if(inputType === "checkbox"){
+      if(isChecked && !opt.checked && (ind===index)) {
+        opt.checked = true;
+      } else if(!isChecked && opt.checked && (ind===index)){
+        opt.checked = false;
+      }
+    } 
+    if(inputType === "radio"){
+      if(isChecked && !opt.checked && (ind===index)) {
+        opt.checked = true;
+      } else {
+        opt.checked = false;
+      }
+    } 
+  });
+  console.log(" - options", options);
+}
+
+  // handleAnswerSelected(e, optionIndex, property){
+  //   console.log("property ",property + ", optionIndex " , optionIndex);
+  //   const isChecked = e.target.checked;
+  //   let selectedAnswers = [...this.state.selectedAnswers];
+  //   if(isChecked) {
+  //     selectedAnswers[property].push(optionIndex);
+  //     this.setState({ selectedAnswers });
+  //   } else {
+  //     var arr = selectedAnswers[property];
+  //     for( var i = 0; i < arr.length; i++){
+  //        if ( arr[i] === optionIndex) { 
+  //          arr.splice(i, 1); 
+  //         }
+  //       }
+  //       console.log("update - > ", arr);
+  //   }
+  //   console.log("selectedAnswers -> ",this.state.selectedAnswers);
+  // }
 
   componentDidMount() {
     this.setState({
-        questionsList: result.questions,
-        question: result.questions[0].question,
-        minAnswers: result.questions[0].answer.minAnswers,
-        answerOptions : result.questions[0].answer.options,
-        weightage: result.questions[0].weightage,
-        category: result.questions[0].category
+      questionsList: result.questions,
+      question: result.questions[0].question,
+      minAnswers: result.questions[0].answer.minAnswers,
+      answerOptions : result.questions[0].answer.options,
+      weightage: result.questions[0].weightage,
+      category: result.questions[0].category,
+      // selectedAnswers : new Array(result.questions.length?result.questions.length: 10)
     });
+    console.log(this.state);
 
     // fetch(API_URL + '/listQuestions', {
     //     method: 'get',
@@ -138,6 +167,7 @@ class QuizContainer extends Component {
           onAnswerSelected = {this.handleAnswerSelected}
           onCheck = {this.checkboxHandler}
           checkedItems = {this.state.checkedItems}
+          handleChange = {this.handleChange}
         />
         <Timer />
       </div>

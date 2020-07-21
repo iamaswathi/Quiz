@@ -225,7 +225,6 @@ button:focus {
 
 .options input:checked+span {
     background-color: #8a909e;
-    /* border: 3px solid #3072d4; */
     color: #fff;
     outline: none;
     width: 100%;

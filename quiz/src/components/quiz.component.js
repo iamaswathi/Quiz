@@ -1,7 +1,8 @@
 import React from 'react';
-import Question from './question.comonent';
+import Question from './question.component';
 import QuestionCount from './question-count.component';
 import AnswerOptions from './answer-options.component';
+// import AnswerOptions from './answer-options-new.component';
 // import Timer from "./timer.component";
 
 function Quiz(props) {
@@ -11,13 +12,16 @@ function Quiz(props) {
             <AnswerOptions
                 index ={index}
                 key={key.id}
+                counter={props.counter}
                 questionId={props.questionId}
                 answerContent={key.value}
                 selectedAnswer={props.selectedAnswer}
                 onAnswerSelected={props.onAnswerSelected}
-                onCheck={props.onCheck}
+                onCheck={key.checked}
                 minAnswers={props.minAnswers}
                 checkedItems={props.checkedItems}
+                handleChange={props.handleChange}
+                answerOptions ={props.answerOptions}
             />
         );
     }
@@ -31,7 +35,7 @@ function Quiz(props) {
             />
             
             <Question  content={props.question} />
-            
+
             <div className="clearfix" >
                 <ul className="answerOptions">
                     {props.answerOptions.map(renderAnswerOptions)}

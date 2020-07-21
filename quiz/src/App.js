@@ -10,9 +10,7 @@ import SignIn from "./components/signin.component";
 import SignUp from "./components/signup.component";
 import ResetPassword from "./components/reset-password.component";
 import ChangePassword from "./components/change-password.component";
-// import Forms from "./components/add-questions.component";
 import AddNewQuestion from "./components/add-update-questions.component";
-// import Quizz from "./components/quiz.component";
 import QuizContainer from "./components/quiz-container.component";
 
 function App() {
